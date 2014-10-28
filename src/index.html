@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="inner.css" />
+</head>
+<body>
+  <!-- <button onclick="setAction('close')">Close</button> -->
+  <!-- <button onclick="setAction('deleteSession')">Delete Session</button> -->
+
+  <ul class="buttons">
+    <li class="button" onclick="setAction('deleteSession')">Delete Session</li>
+    <li class="button" onclick="setAction('expireSession')">Expire Session</li>
+    <li class="button" onclick="setAction('close')">Close</li>
+  </ul>
+
+  <script>
+    function setAction ( action ) {
+      var match = window.location.href.match(/url=([^&?]+)/);
+      if ( match ) {
+        var url = decodeURIComponent(match[1]);
+        url = url.replace(/#.*/, "");
+        window.top.location = url + "#fanplayr:" + encodeURIComponent(action);
+      } else {
+        alert("error getting parent url");
+      }
+    }
+
+    function test () {
+      setAction("fap");
+    }
+  </script>
+</body>
+</html>
