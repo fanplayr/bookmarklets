@@ -31,7 +31,6 @@
     window.location.href.replace(/([^&?=]+)=([^&?=]*)/g, function ( line, key, value ) {
       params[decodeURIComponent(key)] = decodeURIComponent(value);
     });
-    console.log("params", params);
 
     document.getElementById("session-key").innerHTML = "<b>Session Key:</b> " + params.sessionKey;
     document.getElementById("session-endpoint").innerHTML = "<b>Region:</b> " + params.sessionEndpoint;
