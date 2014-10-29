@@ -76,6 +76,12 @@
     removeEl("fanplayr-bm");
     removeEl("fanplayr-bm-style");
     removeEl("fanplayr-bm-overlay");
+
+    if ( window.removeEventListener ) {
+      window.removeEventListener("keydown", onKeyDown, false);
+    } else {
+      window.detachEvent("onkeydown", onKeyDown);
+    }
   }
 
   function removeEl ( id ) {
@@ -88,8 +94,8 @@
   }
 
   function create () {
-    // var base = "//root.dev/fanplayr/repos/bookmarklets/src";
-    var base = "//rawgit.com/fanplayr/bookmarklets/master/src";
+    var base = "//root.dev/fanplayr/repos/bookmarklets/src";
+    // var base = "//rawgit.com/fanplayr/bookmarklets/master/src";
 
     var info = getInfo(true);
 
@@ -113,6 +119,18 @@
     var overlay = doc.createElement("div");
     overlay.id = "fanplayr-bm-overlay";
     doc.body.appendChild(overlay);
+
+    if ( window.addEventListener ) {
+      window.addEventListener("keydown", onKeyDown, false);
+    } else {
+      window.attachEvent("onkeydown", onKeyDown);
+    }
+  }
+
+  function onKeyDown ( event ) {
+    if ( event.keyCode === 27 ) {
+      destroy();
+    }
   }
 
   var history = window.history;
