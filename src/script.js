@@ -128,7 +128,6 @@
   }
 
   function onKeyDown ( event ) {
-    console.log("onKeyDown", event);
     if ( event.keyCode === 27 ) {
       destroy();
     }
