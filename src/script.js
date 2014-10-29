@@ -13,7 +13,7 @@
       var script = document.createElement("script");
       script.async = true;
       script.src = "//" + info.sessionEndpoint + "/external.genius/?a=expire-session&sk=" + info.sessionKey;
-      document.body.appendChild(script);
+      appendEl(script);
     }
   };
 
@@ -23,7 +23,7 @@
       var script = document.createElement("script");
       script.async = true;
       script.src = "//" + info.sessionEndpoint + "/external.genius/?a=expire-session&sk=" + info.sessionKey + "&delete=0";
-      document.body.appendChild(script);
+      appendEl(script);
     }
   };
 
@@ -88,9 +88,11 @@
     var el = doc.getElementById(id);
     if ( el && el.parentNode ) {
       el.parentNode.removeChild(el);
-    } else {
-      console.debug("no parentNode for", el);
     }
+  }
+
+  function appendEl ( el ) {
+    (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(el);
   }
 
   function create () {
@@ -108,17 +110,17 @@
     frame.id = "fanplayr-bm";
     frame.src = url;
     frame.frameBorder = 0;
-    doc.body.appendChild(frame);
+    appendEl(frame);
 
     var styleSheet = doc.createElement("link");
     styleSheet.id = "fanplayr-bm-style";
     styleSheet.rel = "stylesheet";
     styleSheet.href = base + "/style.css";
-    doc.head.appendChild(styleSheet);
+    appendEl(styleSheet);
 
     var overlay = doc.createElement("div");
     overlay.id = "fanplayr-bm-overlay";
-    doc.body.appendChild(overlay);
+    appendEl(overlay);
 
     if ( window.addEventListener ) {
       window.addEventListener("keydown", onKeyDown, false);
