@@ -11,6 +11,8 @@
     <li class="button" onclick="setAction('deleteSession')">Delete Session</li>
     <li class="button" onclick="setAction('expireSession')">Expire Session</li>
     <li class="button" onclick="setAction('close')">Close</li>
+    <li id="session-key"></li>
+    <li id="session-endpoint"></li>
   </ul>
 
   <script>
@@ -25,9 +27,14 @@
       }
     }
 
-    function test () {
-      setAction("fap");
-    }
+    var params = {};
+    window.location.href.replace(/([^&?=]+)=([^&?=]*)/g, function ( line, key, value ) {
+      params[decodeURIComponent(key)] = decodeURIComponent(value);
+    });
+    console.log("params", params);
+
+    document.getElementById("session-key").innerHTML = "<b>Session Key:</b> " + params.sessionKey;
+    document.getElementById("session-endpoint").innerHTML = "<b>Region:</b> " + params.sessionEndpoint;
   </script>
 </body>
 </html>

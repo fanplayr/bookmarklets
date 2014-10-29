@@ -27,7 +27,7 @@
     }
   };
 
-  function getInfo () {
+  function getInfo ( hideErrors ) {
     var errors = [];
     var fanplayr = window.fanplayr;
     if ( fanplayr ) {
@@ -57,7 +57,7 @@
         errors.push("Couldn't determine sessionEndpoint");
       }
 
-      if ( !errors.length ) {
+      if ( hideErrors || !errors.length ) {
         return {
           sessionKey: sessionKey,
           sessionEndpoint: sessionEndpoint
@@ -67,7 +67,7 @@
       errors.push("Fanplayr not present on this site.");
     }
 
-    if ( errors.length ) {
+    if ( !hideErrors && errors.length ) {
       alert(errors.join(". "));
     }
   }
@@ -91,9 +91,16 @@
     // var base = "//root.dev/fanplayr/repos/bookmarklets/src";
     var base = "//rawgit.com/fanplayr/bookmarklets/master/src";
 
+    var info = getInfo(true);
+
+    var url = base + "/index.html" +
+      "?url=" + encodeURIComponent(window.location.href) +
+      "&sessionKey=" + encodeURIComponent(info && info.sessionKey || "") +
+      "&sessionEndpoint=" + encodeURIComponent(info && info.sessionEndpoint || "");
+
     var frame = doc.createElement("iframe");
     frame.id = "fanplayr-bm";
-    frame.src = base + "/index.html?url=" + encodeURIComponent(window.location.href);
+    frame.src = url;
     frame.frameBorder = 0;
     doc.body.appendChild(frame);
 
