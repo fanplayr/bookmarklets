@@ -115,12 +115,19 @@
     doc.body.appendChild(overlay);
   }
 
+  var history = window.history;
+
   function poll () {
     setInterval(function () {
       var href = window.location.href;
       var match = href.match(/#fanplayr:(.*)/);
       if ( match ) {
-        window.location.href = href.substr(0, href.indexOf("#") + 1);
+        if ( history && history.replaceState ) {
+          history.replaceState({}, doc.title, href.substr(0, href.indexOf("#")));
+        } else {
+          window.location.href = href.substr(0, href.indexOf("#") + 1);
+        }
+
         var action = decodeURIComponent(match[1]);
         if ( actions[action] ) {
           actions[action]();
