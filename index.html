@@ -3,6 +3,16 @@
 <head>
 </head>
 <body>
-  <a href="javascript:(function(){var a=document,b=a.createElement('script');b.async=!0,b.src='//rawgit.com/fanplayr/bookmarklets/master/src/script.js?_='+(new Date().getTime()),a.head.appendChild(b)}())" title="Fanplayr Dev Tools">Fanplayr Dev Tools</a>
+  <a href="javascript:!function(){var a=document.createElement('script');a.type='text/javascript',a.async=!0,a.src='//rawgit.com/fanplayr/bookmarklets/master/src/script.js?_='+(new Date).getTime(),(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)}();" title="Fanplayr Dev Tools">Fanplayr Dev Tools</a>
+
+  <pre>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.async = true;
+    script.src = "//rawgit.com/fanplayr/bookmarklets/master/src/script.js?_=" + (new Date().getTime());
+    (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(script);
+  }());
+  </pre>
 </body>
 </html>
