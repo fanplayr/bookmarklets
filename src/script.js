@@ -96,8 +96,8 @@
   }
 
   function create () {
-    var base = "//root.dev/fanplayr/repos/bookmarklets/src";
-    // var base = "//rawgit.com/fanplayr/bookmarklets/master/src";
+    // var base = "//root.dev/fanplayr/repos/bookmarklets/src";
+    var base = "//rawgit.com/fanplayr/bookmarklets/master/src";
 
     var info = getInfo(true);
 
