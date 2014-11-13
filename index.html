@@ -3,15 +3,22 @@
 <head>
 </head>
 <body>
-  <a href="javascript:(function(){var a=document.createElement('script');a.type='text/javascript',a.async=!0,a.src='//rawgit.com/fanplayr/bookmarklets/master/src/script.js?_='+(new Date).getTime(),(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)}())" title="Fanplayr Dev Tools">Fanplayr Dev Tools</a>
+  <a href="javascript:(function(){var e=document.createElement('script');e.type='text/javascript';e.async=true;e.src='//s3.amazonaws.com/fanplayr/browser-dev-tools/loader.js';var t=document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0];if(t){t.appendChild(e)}})()" title="Fanplayr Dev Tools">Production</a>
+
+  <br/><br/>
+
+  <a href="javascript:(function(){var e=document.createElement('script');e.type='text/javascript';e.async=true;e.src='//root.dev/fanplayr/repos/browser-dev-tools/src/fanplayr-bdt.js';var t=document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0];if(t){t.appendChild(e)}})()" title="Fanplayr Dev Tools">Development</a>
 
   <pre>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.async = true;
-    script.src = "//rawgit.com/fanplayr/bookmarklets/master/src/script.js?_=" + (new Date().getTime());
-    (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(script);
+    script.src = "//s3.amazonaws.com/fanplayr/browser-dev-tools/loader.js?";
+    var entry = (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]);
+    if ( entry ) {
+      entry.appendChild(script);
+    }
   }());
   </pre>
 </body>

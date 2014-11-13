@@ -1,5 +1,21 @@
-(function () {
+(function ( window, document ) {
   var doc = document;
+
+  var log = (function ( console ) {
+    var logFn = console && console.log;
+    if ( logFn ) {
+      if ( typeof logFn.bind === "function" ) {
+        return logFn.bind(console, "[FPDT]");
+      } else {
+        return function () {
+          var args = Array.prototype.slice.call(arguments);
+          args.unshift("[FPDT]");
+          logFn(args.join(" "));
+        };
+      }
+    }
+    return function () {};
+  }( window.console ));
 
   var actions = {};
 
@@ -92,12 +108,26 @@
   }
 
   function appendEl ( el ) {
-    (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(el);
+    var body = document.getElementsByTagName("body")[0];
+    if ( body ) {
+      body.appendChild(el);
+    }
+  }
+
+  function getBase () {
+    var scripts = document.getElementsByTagName("script");
+    for ( var i = 0; i < scripts.length; i++ ) {
+      var match = scripts[i].src.match(/(.*?)\/fanplayr-bdt\.js$/i);
+      if ( match ) {
+        return match[1];
+      }
+    }
+    return "//s3.amazonaws.com/fanplayr/browser-dev-tools";
   }
 
   function create () {
-    // var base = "//root.dev/fanplayr/repos/bookmarklets/src";
-    var base = "//rawgit.com/fanplayr/bookmarklets/master/src";
+    var base = getBase();
+    log("base", base);
 
     var info = getInfo(true);
 
@@ -153,7 +183,7 @@
           actions[action]();
         }
       }
-    }, 500);
+    }, 250);
   }
 
   (function () {
@@ -165,4 +195,4 @@
     poll();
   }());
 
-}());
+}( window, document ));
